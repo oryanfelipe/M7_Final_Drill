@@ -1,0 +1,29 @@
+Consultas a través de la consola de python (shell) :
+
+1) Obtenga todos los objetos tanto Laboratorio, DirectorGeneral y Productos.
+	from laboratorio.models import *
+	p=Producto.objects.all().values()
+	print(p)
+	d=DirectorGeneral.objects.all().values() 
+	print(d)
+	lab=Laboratorio.objects.all().values()   
+	print(lab)
+
+2) Obtenga el laboratorio del Producto cuyo nombre es ‘Producto 1’.
+	
+	lab_id=Producto.objects.get(nombre="Producto 1").laboratorio_id 
+	lab_name=Laboratorio.objects.get(id=lab_id)
+	print(lab_name)
+	
+3) Ordene todos los productos por nombre, y que muestre los 
+valores de nombre y laboratorio.
+	
+	productos=Producto.objects.select_related('laboratorio')
+	for p in productos:
+		print(p.nombre,p.laboratorio)
+
+4) Realice una consulta que imprima por pantalla los laboratorios de todos los productos.
+	
+	productos=Producto.objects.select_related('laboratorio')
+	for p in productos:
+		print(p.laboratorio)
